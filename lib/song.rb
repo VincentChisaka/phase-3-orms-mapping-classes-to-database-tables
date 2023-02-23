@@ -2,22 +2,24 @@ class Song
 
   attr_accessor :name, :album, :id
 
-  def initialize(name:, album:, id: nil)
+  def initialize(name:, album:, id: nil )
     @id = id
     @name = name
     @album = album
   end
 
+  
   def self.create_table
-    sql = <<-SQL
-       CREATE TABLE IF NOT EXISTS(
+    sql =  <<-SQL
+      CREATE TABLE IF NOT EXISTS songs (
         id INTEGER PRIMARY KEY,
         name TEXT,
         album TEXT
-       )
-     SQL
+      )
+      SQL
     DB[:conn].execute(sql)
   end
+
   def save
     sql = <<-SQL
       INSERT INTO songs (name, album)
